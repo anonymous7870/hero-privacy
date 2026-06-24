@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HERO 개인정보처리방침</title>
+<style>
+  :root { --red:#C00000; --navy:#1F3864; --ink:#222; --muted:#666; --line:#e3e3e3; }
+  * { box-sizing:border-box; }
+  body { font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    color:var(--ink); line-height:1.75; margin:0; background:#f7f8fa; }
+  .wrap { max-width:860px; margin:0 auto; background:#fff; padding:48px 40px 80px;
+    box-shadow:0 1px 20px rgba(0,0,0,.06); }
+  header { border-bottom:3px solid var(--red); padding-bottom:18px; margin-bottom:8px; }
+  h1 { font-size:28px; margin:0 0 4px; color:var(--navy); letter-spacing:-.5px; }
+  .sub { color:var(--muted); font-size:14px; }
+  .meta { background:#f2f4f8; border-radius:10px; padding:14px 18px; margin:22px 0 30px; font-size:14px; }
+  .meta b { color:var(--navy); }
+  h2 { font-size:19px; color:var(--navy); margin:34px 0 10px; padding-left:12px;
+    border-left:4px solid var(--red); }
+  h3 { font-size:15px; margin:18px 0 6px; color:#333; }
+  p, li { font-size:15px; }
+  ul { padding-left:22px; }
+  table { width:100%; border-collapse:collapse; margin:12px 0; font-size:14px; }
+  th, td { border:1px solid var(--line); padding:9px 12px; text-align:left; vertical-align:top; }
+  th { background:#f2f4f8; color:var(--navy); font-weight:700; }
+  .note { background:#fff8e6; border:1px solid #f0d98a; border-radius:8px; padding:12px 16px;
+    font-size:14px; margin:14px 0; }
+  .hl { background:#fde7e7; color:var(--red); font-weight:600; padding:0 3px; border-radius:3px; }
+  footer { margin-top:46px; padding-top:18px; border-top:1px solid var(--line);
+    color:var(--muted); font-size:13px; }
+  a { color:var(--red); }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>🦸 HERO 개인정보처리방침</h1>
+  <div class="sub">Humanity-driven Emergency Response Organizer</div>
+</header>
+
+<div class="meta">
+  <b>HERO</b>(이하 ‘서비스’)는 「개인정보 보호법」 등 관련 법령을 준수하며, 이용자의 개인정보를
+  안전하게 보호하기 위해 본 개인정보처리방침을 수립·공개합니다.<br>
+  <b>시행일자:</b> 2026년 6월 24일
+</div>
+
+<p>HERO는 심정지·응급 상황에서 시민 구조자(HERO)·환자·응급요원·병원·관제센터를 실시간으로
+연결하는 공공안전 플랫폼입니다. 서비스 특성상 <span class="hl">건강·의료정보(민감정보)와 위치정보</span>를
+처리하며, 이에 대해서는 별도의 명시적 동의를 받아 처리합니다.</p>
+
+<h2>1. 수집하는 개인정보 항목</h2>
+<table>
+<tr><th>구분</th><th>수집 항목</th></tr>
+<tr><td>회원가입(공통)</td><td>이름, 이메일, 휴대전화번호, 비밀번호, 주소</td></tr>
+<tr><td>역할 인증(HERO·응급요원·병원)</td><td>면허·자격번호, 면허증/자격증 사본(이미지), 본인 사진, 소속 기관</td></tr>
+<tr><td class="hl">환자 의료정보(민감정보)</td><td>혈액형, 알레르기 정보, 복용 중인 약, 보호자 성명·연락처·주소</td></tr>
+<tr><td class="hl">위치정보</td><td>실시간 GPS 좌표, WiFi 기반 보조 측위, 고도/층수 추정값</td></tr>
+<tr><td>현장 채증</td><td>응급 대응 현장 영상(AES-256 암호화 저장)</td></tr>
+<tr><td>자동 수집</td><td>기기정보(모델·OS), 푸시 알림 토큰(FCM), 접속·서비스 이용 기록, 근무(온듀티) 기록</td></tr>
+</table>
+<div class="note">⚠️ 민감정보(건강·의료) 및 위치정보는 「개인정보 보호법」 제23조·「위치정보의 보호 및
+이용 등에 관한 법률」에 따라 <b>별도의 동의</b>를 받아 수집하며, 동의를 거부할 권리가 있습니다.
+다만 응급 대응의 특성상 위치정보 미동의 시 핵심 기능(SOS·구조자 매칭)의 이용이 제한될 수 있습니다.</div>
+
+<h2>2. 개인정보의 수집·이용 목적</h2>
+<ul>
+  <li>응급 사고 접수 및 인근 구조자(HERO) 실시간 매칭·출동 알림</li>
+  <li>현장 의료 대응(혈액형·알레르기·복용약 등 환자 정보 제공)</li>
+  <li>구조 과정의 법적 증빙(채증 영상 무결성·인계 기록) 확보</li>
+  <li>119·의료기관과의 응급 연계 및 이송 지원</li>
+  <li>구조자 자격(면허) 확인 및 가입 승인</li>
+  <li>서비스 운영·고지, 부정 이용 방지, 통계·품질 개선</li>
+</ul>
+
+<h2>3. 개인정보의 보유 및 이용기간</h2>
+<table>
+<tr><th>항목</th><th>보유기간</th></tr>
+<tr><td>회원 정보</td><td>회원 탈퇴 시까지 (탈퇴 즉시 파기)</td></tr>
+<tr><td>위치정보</td><td>수집 목적 달성 후 즉시 또는 최대 6개월 이내 파기</td></tr>
+<tr><td>응급 사고·채증·인계 기록</td><td>법적 증빙 목적상 사고 종료일로부터 3년</td></tr>
+<tr><td>의료정보 접근(열람) 기록</td><td>감사 목적 3년</td></tr>
+<tr><td>관계 법령상 보존 정보</td><td>전자상거래법·통신비밀보호법 등 법정 기간</td></tr>
+</table>
+
+<h2>4. 개인정보의 제3자 제공</h2>
+<p>HERO는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만 <b>응급 구조라는 서비스의
+본질적 목적</b>을 위해 다음의 경우 최소한의 정보를 제공합니다.</p>
+<table>
+<tr><th>제공받는 자</th><th>제공 항목</th><th>목적</th></tr>
+<tr><td>출동 수락 HERO(구조자)</td><td>사고 위치, 환자 의료정보(혈액형·알레르기·복용약), 보호자 연락처</td><td>현장 응급처치</td></tr>
+<tr><td>119·소방·응급의료기관</td><td>사고 위치·상태, 환자 정보</td><td>응급 이송·치료 연계</td></tr>
+</table>
+<p>그 밖에 법령에 근거하거나 정보주체의 별도 동의가 있는 경우에 한해 제공합니다.</p>
+
+<h2>5. 개인정보 처리의 위탁</h2>
+<p>HERO는 서비스 운영을 위해 아래와 같이 개인정보 처리를 위탁하고 있으며, 위탁계약 시 개인정보가
+안전하게 관리되도록 관리·감독합니다.</p>
+<table>
+<tr><th>수탁자</th><th>위탁 업무</th></tr>
+<tr><td>Supabase (PostgreSQL/Storage 인프라)</td><td>데이터 저장·인증·파일 보관</td></tr>
+<tr><td>Google (Firebase Cloud Messaging)</td><td>푸시 알림 발송</td></tr>
+<tr><td>LiveKit</td><td>실시간 영상·음성 통신</td></tr>
+<tr><td>CoolSMS</td><td>SMS(문자) 발송</td></tr>
+<tr><td>Kakao</td><td>지도·길안내, 주소 검색</td></tr>
+</table>
+
+<h2>6. 개인정보의 파기 절차 및 방법</h2>
+<ul>
+  <li>보유기간 경과·처리목적 달성 시 지체 없이 파기합니다.</li>
+  <li>전자적 파일: 복구 불가능한 방법으로 영구 삭제</li>
+  <li>출력물 등: 분쇄 또는 소각</li>
+</ul>
+
+<h2>7. 정보주체의 권리·의무 및 행사 방법</h2>
+<p>이용자는 언제든지 본인의 개인정보에 대해 <b>열람·정정·삭제·처리정지</b>를 요구할 수 있으며,
+앱 내 ‘내 정보’ 메뉴 또는 아래 개인정보보호책임자에게 연락하여 행사할 수 있습니다.</p>
+
+<h2>8. 개인정보의 안전성 확보조치</h2>
+<ul>
+  <li><b>전송·저장 암호화:</b> 통신 구간 TLS, 채증 영상 AES-256 암호화 및 해시체인 무결성 검증</li>
+  <li><b>접근통제:</b> 행 수준 보안(RLS)으로 본인·권한자만 데이터 접근, 최소권한 원칙</li>
+  <li><b>접근기록 보관:</b> 의료정보 열람 등 민감 접근은 접근로그로 기록·관리</li>
+  <li><b>인증:</b> 자격(면허) 검증 및 관리자 권한 분리(RBAC)</li>
+</ul>
+
+<h2>9. 만 14세 미만 아동의 개인정보</h2>
+<p>만 14세 미만 아동의 회원가입은 법정대리인의 동의를 받아 처리합니다. 다만 생명·신체에 대한
+긴급한 위험으로부터 보호하기 위한 응급 상황에서는 관련 법령에 따라 처리될 수 있습니다.</p>
+
+<h2>10. 개인정보보호책임자</h2>
+<table>
+<tr><th>구분</th><th>내용</th></tr>
+<tr><td>개인정보보호책임자</td><td>Daniel Kim</td></tr>
+<tr><td>이메일</td><td><a href="mailto:dkfelix07770@gmail.com">dkfelix07770@gmail.com</a></td></tr>
+<tr><td>주소</td><td>Yonsei University, 50 Yonsei-ro, Seodaemun-gu, Seoul 03722, Republic of Korea</td></tr>
+</table>
+
+<h2>11. 권익침해 구제 방법</h2>
+<p>개인정보 침해로 인한 신고·상담이 필요하신 경우 아래 기관에 문의하실 수 있습니다.</p>
+<ul>
+  <li>개인정보분쟁조정위원회 : (국번없이) 1833-6972 / <a href="https://www.kopico.go.kr">www.kopico.go.kr</a></li>
+  <li>개인정보침해신고센터 : (국번없이) 118 / <a href="https://privacy.kisa.or.kr">privacy.kisa.or.kr</a></li>
+  <li>대검찰청 사이버수사과 : 1301 / 경찰청 사이버수사국 : 182</li>
+</ul>
+
+<h2>12. 개인정보처리방침의 변경</h2>
+<p>본 방침은 법령·서비스 변경에 따라 개정될 수 있으며, 변경 시 시행 7일 전부터 공지합니다.</p>
+
+<footer>
+  HERO — Humanity-driven Emergency Response Organizer<br>
+  본 개인정보처리방침은 2026년 6월 24일부터 시행됩니다.
+</footer>
+</div>
+</body>
+</html>
