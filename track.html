@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>HERO 실시간 추적</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<style>
+  html,body{margin:0;height:100%;font-family:-apple-system,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;background:#0b0d12;color:#eee;}
+  #map{position:absolute;top:64px;bottom:0;left:0;right:0;}
+  header{position:absolute;top:0;left:0;right:0;height:64px;background:#11141c;border-bottom:1px solid #222;
+    display:flex;align-items:center;padding:0 16px;z-index:1000;gap:10px;}
+  .logo{font-weight:900;color:#FF2D2D;font-size:18px;letter-spacing:1px;}
+  .sub{color:#888;font-size:12px;}
+  .pill{margin-left:auto;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;}
+  .live{background:#00e5a022;color:#00E5A0;} .off{background:#ff3b3022;color:#ff3b30;}
+  #overlay{position:absolute;inset:64px 0 0 0;display:flex;align-items:center;justify-content:center;
+    flex-direction:column;background:#0b0d12;z-index:900;text-align:center;padding:24px;}
+  #overlay h2{margin:8px 0;font-size:20px;} #overlay p{color:#888;font-size:14px;line-height:1.6;}
+  .dot{width:54px;height:54px;border-radius:50%;background:#ff3b3022;display:flex;align-items:center;justify-content:center;font-size:26px;}
+  .leaflet-popup-content{font-size:13px;font-weight:600;}
+</style>
+</head>
+<body>
+<header>
+  <span class="logo">🦸 HERO</span>
+  <span class="sub">가족 실시간 추적</span>
+  <span id="status" class="pill live">● 연결 중</span>
+</header>
+<div id="map"></div>
+<div id="overlay"><div class="dot">⏳</div><h2>위치를 불러오는 중…</h2><p>잠시만 기다려주세요.</p></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const URL_ = "https://mxqvuosfcnfcpmaccmfj.supabase.co";
+const ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im14cXZ1b3NmY25mY3BtYWNjbWZqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM5OTQ4MDUsImV4cCI6MjA4OTU3MDgwNX0.cWYSO1CEmd4FEiWxGgR6OktAVaCaaT0fu045-_eDJPE";
+const params = new URLSearchParams(location.search);
+const incidentId = params.get("i") || params.get("incident");
+
+let map, patientMarker, responderMarkers = [];
+const redIcon  = L.divIcon({html:'<div style="font-size:30px">🔴</div>',className:'',iconSize:[30,30],iconAnchor:[15,28]});
+const heroIcon = L.divIcon({html:'<div style="font-size:28px">🦸</div>',className:'',iconSize:[28,28],iconAnchor:[14,26]});
+
+function setStatus(live, txt){ const s=document.getElementById('status'); s.className='pill '+(live?'live':'off'); s.textContent=txt; }
+function showOverlay(emoji,title,desc){
+  document.getElementById('overlay').style.display='flex';
+  document.getElementById('overlay').innerHTML=`<div class="dot">${emoji}</div><h2>${title}</h2><p>${desc}</p>`;
+}
+function hideOverlay(){ document.getElementById('overlay').style.display='none'; }
+
+async function poll(){
+  if(!incidentId){ showOverlay('⚠️','잘못된 링크','추적할 사고 정보가 없습니다.'); setStatus(false,'● 오류'); return; }
+  try{
+    const r = await fetch(`${URL_}/rest/v1/rpc/get_active_incident_location`,{
+      method:'POST', headers:{apikey:ANON,Authorization:'Bearer '+ANON,'Content-Type':'application/json'},
+      body: JSON.stringify({p_incident_id: incidentId})
+    });
+    const d = await r.json();
+    if(!d || d.active===false){
+      showOverlay('✅','상황 종료','해당 응급 상황이 종료되어 더 이상 위치를 표시하지 않습니다.<br>안전을 확인해주세요.');
+      setStatus(false,'● 종료됨'); return;
+    }
+    hideOverlay(); setStatus(true,'● 실시간');
+    const plat=d.patient_lat, plon=d.patient_lon;
+    if(!map){
+      map=L.map('map').setView([plat,plon],15);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OSM'}).addTo(map);
+    }
+    if(!patientMarker){ patientMarker=L.marker([plat,plon],{icon:redIcon}).addTo(map).bindPopup('환자 위치'); }
+    else patientMarker.setLatLng([plat,plon]);
+    responderMarkers.forEach(m=>map.removeLayer(m)); responderMarkers=[];
+    (d.responders||[]).forEach(h=>{
+      const m=L.marker([h.lat,h.lon],{icon:heroIcon}).addTo(map).bindPopup('🦸 '+(h.name||'구조자')); responderMarkers.push(m);
+    });
+    const cnt=(d.responders||[]).length;
+    if(cnt>0){ const g=L.featureGroup([patientMarker,...responderMarkers]); map.fitBounds(g.getBounds().pad(0.3)); }
+  }catch(e){ setStatus(false,'● 재연결'); }
+}
+poll(); setInterval(poll, 5000);
+</script>
+</body>
+</html>
