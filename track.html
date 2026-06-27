@@ -60,7 +60,9 @@ async function poll(){
       showOverlay('✅','상황 종료','해당 응급 상황이 종료되어 더 이상 위치를 표시하지 않습니다.<br>안전을 확인해주세요.');
       setStatus(false,'● 종료됨'); return;
     }
-    hideOverlay(); setStatus(true,'● 실시간');
+    hideOverlay();
+    const stepMap={dispatched:'🚑 구조자 출동',arrived:'📍 현장 도착',treating:'⛑️ 응급처치 중',handover:'🤝 119 인계'};
+    setStatus(true, stepMap[d.hero_status] || '● 실시간');
     const plat=d.patient_lat, plon=d.patient_lon;
     if(!map){
       map=L.map('map').setView([plat,plon],15);
@@ -70,7 +72,9 @@ async function poll(){
     else patientMarker.setLatLng([plat,plon]);
     responderMarkers.forEach(m=>map.removeLayer(m)); responderMarkers=[];
     (d.responders||[]).forEach(h=>{
-      const m=L.marker([h.lat,h.lon],{icon:heroIcon}).addTo(map).bindPopup('🦸 '+(h.name||'구조자')); responderMarkers.push(m);
+      const eta = (h.eta_min!=null)? ` · ETA ${h.eta_min}분` : '';
+      const dist = (h.dist_m!=null)? ` (${h.dist_m>=1000? (h.dist_m/1000).toFixed(1)+'km' : Math.round(h.dist_m)+'m'})` : '';
+      const m=L.marker([h.lat,h.lon],{icon:heroIcon}).addTo(map).bindPopup('🦸 '+(h.name||'구조자')+dist+eta); responderMarkers.push(m);
     });
     const cnt=(d.responders||[]).length;
     if(cnt>0){ const g=L.featureGroup([patientMarker,...responderMarkers]); map.fitBounds(g.getBounds().pad(0.3)); }
